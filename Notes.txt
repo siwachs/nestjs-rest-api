@@ -1,0 +1,122 @@
+Nest.JS ia a Node.JS framework.
+It solve architecture problem comes with express.js
+It is scalable and mantainable, TS friendly, Modular Structure, use Dependency Injection, Use Express.js (ie it is abstraction on Express.js)
+
+Why use this?
+Structure, Modularity, TS, Easy to integrate with GraphQL, Microservices, REST API.
+
+To create nest.js app we need nest js cli.
+And CMD: nest new projectName
+
+Also it have default End-to-End testing capablitites
+End-to-End Testing -> testing where the complete functionality of an application or system is tested from start to finish. End-to-end tests ensure that all the integrated components work together as expected.
+
+Decorator -> is a function that adds or submit a data to current class or function that it decorate ie it adds more property to that class.
+
+To build a Module we need ot create a module annotate it with @Module, Controller with @Controller and service with @Injectable 
+
+Module allow us to brak our app into smaller components that can easily manage.
+1) Module -> A module is a class annotated with a @Module() decorator. The @Module() decorator provides metadata that Nest makes use of to organize the application structure.
+Each application has at least one module, a root module. The root module is the starting point Nest uses to build the application graph - the internal data structure Nest uses to resolve module and provider relationships and dependencies.
+app.module.ts is AKA the main module of the app that will import other modules also other modules can also import other modules.
+
+And every model can also import Controllers and Providers
+
+Feature Modules
+The CatsController and CatsService belong to the same application domain. As they are closely related, it makes sense to move them into a feature module. A feature module simply organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries. This helps us manage complexity and develop with SOLID principles, especially as the size of the application and/or team grows.
+
+Example:
+                                 Application Module
+                        users Module       orders Module       chat Module
+                        And then some feature Modules use by thse modules
+
+
+To create a Module via terminal
+nest g module user
+
+When we build nest.js app we seperate the logic into controllers and services/providers.
+Controllers handle incoming request and handle responses to the client.
+services/providers reponsible for executing business logic in our app.
+
+
+Nest.js have a auto data typing ie in controllers if we return a text it auto convert to HTML, if we return a object it automatically became JSON Object.
+2) Controllers
+Controllers responsible for handling incoming requests and returning responses to the client.
+A controller's purpose is to receive specific requests for the application. The routing mechanism controls which controller receives which requests. Frequently, each controller has more than one route, and different routes can perform different actions.
+
+In order to create a basic controller, we use classes and decorators. Decorators associate classes with required metadata and enable Nest to create a routing map (tie requests to the corresponding controllers).
+
+3) Routing
+In the following example we'll use the @Controller() decorator, which is required to define a basic controller. We'll specify an optional route path prefix of cats. Using a path prefix in a @Controller() decorator allows us to easily group a set of related routes, and minimize repetitive code. For example, we may choose to group a set of routes that manage interactions with a cat entity under the route /cats. In that case, we could specify the path prefix cats in the @Controller() decorator so that we don't have to repeat that portion of the path for each route in the file.
+
+
+4) Dependency Injection
+Let say we have a AuthService Class and a AuthController class
+What happen is controller have to call a service. The controller recive a HTTP request from the Internet let say to a POST request to Login a User.
+Now controller invoke a method from Auth Service class and return it request to client.
+
+But for this Auth Controller have to Instantiate Auth Service class.
+Ex:
+const service = new AuthService()
+
+To avoid that (ie where it created or where it invoked)
+We use Dependency Injection
+
+ie insted of our controller to do somethin like that.
+we can do something like
+
+constructor(private authService: AuthService){}
+and everything manage by Dependency Injection
+
+
+Now the benefit of break module into Controller and service is that it keep our controller clean and only responsible for handling requests and service is handling business logic like (connecting to DB, Editing the fields ...)
+
+Prisma.io is a ORM AKA Query builder. Just like Mongoose, Sequelize etc.
+In it we define a model of our table and get them from method provide by that model.
+
+
+To use Prisma and DB create a new Module Prisma and import inside other modules and by deffault we have access to providers of Modules.
+So extend class Prisma client in Prisma Module.
+
+
+In Auth Service that is part of auth Module and that has access to the Prisma Module now because Auth module import it. With this we can get Prisma Service via Dependency Injection.
+
+
+
+6) DTO (Data transfer object)
+A DTO (Data Transfer Object) is a design pattern used to transfer data between software application layers, especially in scenarios where you want to encapsulate data to be sent over a network or between different systems. A DTO is typically a simple object that does not contain any business logic but rather holds data attributes that need to be shared.
+
+It is good thing to use DTO's instead of underlying @Req decorator. For independence to frameworks. What if we switch to fastify from express. For this use DTO to became framework independent.
+ie in Nest.js It is object that push your data from a req and can validate it.
+
+For DTO's
+https://medium.com/@klauskpm/do-a-barrel-export-aa5b79b76b05
+
+
+
+7) Pipes
+A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface.
+Pipes have two typical use cases:
+
+transformation: transform input data to the desired form (e.g., from string to integer)
+validation: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception
+
+Built-in pipes
+Nest comes with nine pipes available out-of-the-box:
+
+ValidationPipe
+ParseIntPipe
+ParseFloatPipe
+ParseBoolPipe
+ParseArrayPipe
+ParseUUIDPipe
+ParseEnumPipe
+DefaultValuePipe
+ParseFilePipe
+
+Class Validator
+Nest works well with the class-validator library. This powerful library allows you to use decorator-based validation. Decorator-based validation is extremely powerful, especially when combined with Nest's Pipe capabilities since we have access to the metatype of the processed property.
+
+To Persist a user Authenticate we can use Sessions or JWT
+
+And in Nest.JS we have a Built in module for it.

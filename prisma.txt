@@ -1,0 +1,17 @@
+yarn add -D prisma
+yarn add @prisma/clinet
+
+npx prisma init
+
+Create model into prisma/schema.prisma
+
+Migration
+
+This dev command will delete existing data
+npx prisma migrate dev
+
+Web interface of DB
+npx prisma studio
+
+App Migration to DB
+prisma migrate deploy
