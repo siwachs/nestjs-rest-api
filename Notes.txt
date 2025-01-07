@@ -117,6 +117,23 @@ ParseFilePipe
 Class Validator
 Nest works well with the class-validator library. This powerful library allows you to use decorator-based validation. Decorator-based validation is extremely powerful, especially when combined with Nest's Pipe capabilities since we have access to the metatype of the processed property.
 
+8) Authentication and Auterization
 To Persist a user Authenticate we can use Sessions or JWT
-
 And in Nest.JS we have a Built in module for it.
+
+Nestjs have a default authentication provider (Passport.js)
+It a authentication tool for Express.JS with lot of strategy like Login with Google, OAuth, JWT ...
+
+JWT is a string with a string and data which are signed with a secret key using alogrithms. The most common one is SH256.
+It is a compact, URL-safe way of representing claims (statements) to be transferred between two parties, such as a server and a client.
+
+The package @nestjs/jwt is modular code for nestjs which under the hood jwt library.
+@nestjs/passport that implements passport to nestjs.
+
+Strategy: The logic  that verift that a Bearer token is correct is called strategy.
+
+
+9) @nestjs/config
+Applications often run in different environments. Depending on the environment, different configuration settings should be used. For example, usually the local environment relies on specific database credentials, valid only for the local DB instance. The production environment would use a separate set of DB credentials. Since configuration variables change, best practice is to store configuration variables in the environment.
+
+This module is present in root module ie app.module or we can also place it in src/config as a seperate module.
