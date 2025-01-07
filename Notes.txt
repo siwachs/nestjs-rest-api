@@ -150,6 +150,8 @@ Unit Testing -> Unit testing focuses on testing individual functions or componen
 Integration Testing -> Integration testing is focused on testing how multiple components or systems work together. It ensures that the modules that interact with each other do so correctly and that data flows properly between them.
 
 E2E Testing -> E2E testing is a comprehensive form of testing that validates the entire application flow from start to finish. It ensures that all parts of the system work together as expected, simulating real user interactions with the application.
+It does not interact how out function interact with each other we might get correct result maybe but something in DB is not set in correct format.
+For this we have intergration testing.
 
 Recommended package by Nest JS is PactumJS for API testing
 
