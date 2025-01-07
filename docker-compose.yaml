@@ -7,8 +7,19 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTRES_DB: restAPI
+      POSTGRES_DB: restAPI
     networks:
       - dev-network
+  test-db:
+    image: postgres:13
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: restAPI
+    networks:
+      - test-network
 networks:
   dev-network:
+  test-network:

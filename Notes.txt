@@ -132,8 +132,26 @@ The package @nestjs/jwt is modular code for nestjs which under the hood jwt libr
 
 Strategy: The logic  that verift that a Bearer token is correct is called strategy.
 
+Guards
+A guard is a class annotated with the @Injectable() decorator, which implements the CanActivate interface.
+
 
 9) @nestjs/config
 Applications often run in different environments. Depending on the environment, different configuration settings should be used. For example, usually the local environment relies on specific database credentials, valid only for the local DB instance. The production environment would use a separate set of DB credentials. Since configuration variables change, best practice is to store configuration variables in the environment.
 
 This module is present in root module ie app.module or we can also place it in src/config as a seperate module.
+
+
+
+10) Testing
+
+Unit Testing -> Unit testing focuses on testing individual functions or components (the "unit") in isolation. The goal is to ensure that each unit of the software works as intended by checking its behavior with different inputs and scenarios.
+
+Integration Testing -> Integration testing is focused on testing how multiple components or systems work together. It ensures that the modules that interact with each other do so correctly and that data flows properly between them.
+
+E2E Testing -> E2E testing is a comprehensive form of testing that validates the entire application flow from start to finish. It ensures that all parts of the system work together as expected, simulating real user interactions with the application.
+
+Recommended package by Nest JS is PactumJS for API testing
+
+And dotenv-cli package is perfect to manage env variables in test and dev environment.
+Just install it and add a .env.test and add that file in script during command execution
