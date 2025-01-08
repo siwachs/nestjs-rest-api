@@ -8,6 +8,7 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import * as pactum from 'pactum';
 
 import { AuthDto } from '../src/auth/dto';
+import { EdituserDto } from '../src/user/dto';
 
 // Nest JS take root module ie app.module and compile it and we load that compiled module and test it.
 // yarn test:e2e
@@ -17,7 +18,7 @@ describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
 
-  const PORT = process.env.PORT ?? 8000;
+  const PORT = process.env.PORT ?? 8001;
 
   // Initially
   beforeAll(async () => {
@@ -126,7 +127,24 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Edit user', () => {});
+    describe('Edit user', () => {
+      it('Should Edit a user', () => {
+        const dto: EdituserDto = {
+          email: 'new.email@gmail.com',
+          firstName: 'Edited first name',
+        };
+
+        return pactum
+          .spec()
+          .patch('/users')
+          .withHeaders({
+            Authorization: `Bearer $S{access_token}`,
+          })
+          .withBody(dto)
+          .expectStatus(200)
+          .inspect();
+      });
+    });
   });
 
   describe('Bookmarks', () => {
